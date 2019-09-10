@@ -1,38 +1,26 @@
 package logica;
 
-//import javafx.application.Application;
-import DoublyLinkedList_Pack.DoublyLinkedList;
+import javafx.application.Application;
+import javafx.scene.Group;
+import javafx.scene.Scene;
+import javafx.scene.canvas.Canvas;
+import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 /**
- * Metodo principal de la aplicacion
- * @author Jose Julian Camacho
+ * Mátodo principal de la aplicación
+ * @author José Julián Camacho
  * @date 4.9.19
  * */
-public class Main {//extends Application {
-/*
+public class Main extends Application {
     public static void main(String[] args) {
         Application.launch(args);
     }
+
     @Override
     public void start(Stage primaryStage) throws Exception {
-        primaryStage.setTitle("Circuit Designer");
-    }
-}
-*/
-    public static void main(String[] args) {
-        DoublyLinkedList milista = new DoublyLinkedList();
-        System.out.println(milista.getLength());
-        milista.getData(4);
-        milista.addLast(3);
-        milista.addLast(5);
-        milista.addLast(10);
-        milista.addFirst(8);
-        milista.addFirst(1);
-        System.out.println(milista.getLength());
-        milista.getData(3);
-        milista.setData(3, 60);
-        System.out.println(milista.getLength());
-        milista.printList();
-        milista.reversePrintList();
+        GUI.createInterface(primaryStage);
     }
 }
