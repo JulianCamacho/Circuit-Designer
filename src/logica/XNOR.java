@@ -1,12 +1,12 @@
 package logica;
 
-public class NXOR extends Gate {
+public class XNOR extends Gate {
     private boolean input1;
     private boolean input2;
     private Gate prev1;
     private Gate prev2;
 
-    public NXOR() {
+    public XNOR() {
         super();
         this.input1 = false;
         this.input2 = false;
@@ -16,13 +16,13 @@ public class NXOR extends Gate {
 
     @Override
     public boolean logic() {
-        boolean NXORresult = false;
+        boolean XNORresult = false;
         if (this.prev1 == null | this.prev2 == null) {
             System.out.println("Exception");
         } else {
-            NXORresult = !(!(this.input1 & this.input2) & (this.input1 | this.input2));
-            this.setOutput(NXORresult);
+            XNORresult = !(!(this.input1 & this.input2) & (this.input1 | this.input2));
+            this.setOutput(XNORresult);
         }
-        return NXORresult;
+        return XNORresult;
     }
 }

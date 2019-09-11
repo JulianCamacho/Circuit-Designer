@@ -6,6 +6,6 @@ public enum GateType {
     OR,
     NOR,
     XOR,
-    NXOR,
+    XNOR,
     NOT;
 }

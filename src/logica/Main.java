@@ -3,7 +3,7 @@ package logica;
 import javafx.application.Application;
 import javafx.stage.Stage;
 /**
- * Mátodo principal de la aplicación
+ * Método principal de la aplicación
  * @author José Julián Camacho
  * @date 4.9.19
  * */

@@ -18,8 +18,8 @@ public class GateFactory {
         if (gt == GateType.XOR){
             return new XOR();
         }
-        if (gt == GateType.NXOR){
-            return new NXOR();
+        if (gt == GateType.XNOR){
+            return new XNOR();
         }
         if (gt == GateType.NOT){
             return new NOT();
