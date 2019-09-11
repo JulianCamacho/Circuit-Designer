@@ -1,5 +1,6 @@
 package logica;
 
+import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.scene.Group;
 import javafx.scene.Node;
@@ -9,6 +10,10 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.ClipboardContent;
+import javafx.scene.input.Dragboard;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.input.TransferMode;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
@@ -33,21 +38,25 @@ public class GUI {
         bp.setCenter(canvas);
         GraphicsContext gc = canvas.getGraphicsContext2D();
 
-
-
         root.getChildren().addAll(canvas, bp);
 
         primaryStage.setScene(scene);
         primaryStage.show();
 
-        return primaryStage;
-    }
-/*
-    private static Image getImage(String path){
-        Image newImage = new Image(path);
-        return newImage;
-    }*/
 
+    bp.setOnDragDetected(event -> {
+        /* drag was detected, start drag-and-drop gesture*/
+        System.out.println("onDragDetected");
+        /* allow any transfer mode */
+        Dragboard db = bp.startDragAndDrop(TransferMode.ANY);
+
+        ClipboardContent content = new ClipboardContent();
+        content.getImage();
+        });
+
+        return primaryStage;
+
+    }
     private static FlowPane addFlowPane() {
         FlowPane flow = new FlowPane();
         flow.setPadding(new Insets(5, 0, 5, 0));
@@ -55,6 +64,12 @@ public class GUI {
         flow.setHgap(4);
         flow.setPrefWrapLength(170); // preferred width allows for two columns
         flow.setStyle("-fx-background-color: DAE6F3;");
+
+        //Image image1 = new Image("./bmwi_.png");
+        //ImageView iV1 = new ImageView();
+        //iV1.setImage(image1);
+
+        //flow.getChildren().add(iV1);
 
         return flow;
     }
