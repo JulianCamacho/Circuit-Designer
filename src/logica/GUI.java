@@ -1,6 +1,7 @@
 package logica;
 
 import javafx.event.EventHandler;
+import javafx.event.EventType;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Group;
@@ -12,10 +13,7 @@ import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.*;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.FlowPane;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
@@ -34,9 +32,12 @@ public class GUI {
          **/
         BorderPane root = new BorderPane();
         Scene scene = new Scene(root,800, 600, Color.LIGHTGRAY );
-
-        Canvas canvas = new Canvas();
-        root.setCenter(canvas);
+        // Create a wrapper Pane first
+        Pane wrapperPane = new Pane();
+        root.setCenter(wrapperPane);
+        // Put canvas in the center of the window
+        Canvas canvas = new Canvas(600, 400);
+        wrapperPane.getChildren().add(canvas);
 
         MyFlowPane myFlowPane = new MyFlowPane();
         root.setRight(myFlowPane.addFlowPane());
@@ -45,40 +46,22 @@ public class GUI {
         root.setTop(myHBox);
 
         GraphicsContext gc = canvas.getGraphicsContext2D();
+        gc.drawImage(myFlowPane.getANDimage(), 30, 30);
+        gc.setFill(Color.BEIGE);
 
         primaryStage.setScene(scene);
         primaryStage.show();
 
-        /**
-         * Event Handlers para el Drag & Drop
-         * */
+        DragFeature dragdrop = new DragFeature();
+        dragdrop.myDrag(myFlowPane, canvas, gc);
 
-    root.setOnDragDetected(event -> {
-        /* drag was detected, start drag-and-drop gesture*/
-        System.out.println("onDragDetected");
-        /* allow any transfer mode */
-        Dragboard db = root.startDragAndDrop(TransferMode.ANY);
-
-        ClipboardContent content = new ClipboardContent();
-        content.putImage(myFlowPane.getANDimage());
-        db.setContent(content);
-        event.consume();
-        });
-
-        root.setOnDragDropped(new EventHandler <DragEvent>() {
-            public void handle(DragEvent event) {
-                /* data dropped */
-                System.out.println("onDragDropped");
-                Dragboard db = event.getDragboard();
-                boolean success = false;
-                if (db.hasImage()) {
-                    gc.drawImage(myFlowPane.getANDimage(), 30, 30);
-                    success = true;
-                    event.setDropCompleted(success);
-                }
+        canvas.setOnMouseEntered(event -> {
+            System.out.println("hay un canvas");
             event.consume();
-            }
         });
+
+
+
         return primaryStage;
     }
 
