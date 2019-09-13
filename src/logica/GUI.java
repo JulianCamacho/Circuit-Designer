@@ -36,7 +36,8 @@ public class GUI {
         Pane wrapperPane = new Pane();
         root.setCenter(wrapperPane);
         // Put canvas in the center of the window
-        Canvas canvas = new Canvas(600, 400);
+        Canvas canvas = new Canvas(630, 550);
+
         wrapperPane.getChildren().add(canvas);
 
         MyFlowPane myFlowPane = new MyFlowPane();
@@ -46,14 +47,16 @@ public class GUI {
         root.setTop(myHBox);
 
         GraphicsContext gc = canvas.getGraphicsContext2D();
-        gc.drawImage(myFlowPane.getANDimage(), 30, 30);
-        gc.setFill(Color.BEIGE);
+        gc.setFill(Color.BLUE);
 
         primaryStage.setScene(scene);
         primaryStage.show();
 
-        DragFeature dragdrop = new DragFeature();
-        dragdrop.myDrag(myFlowPane, canvas, gc);
+        DragAndDropFeature dragdrop = new DragAndDropFeature();
+        dragdrop.myDragAndDrop(myFlowPane, canvas, gc);
+
+        DrawLineFeature drawLine = new DrawLineFeature();
+        drawLine.myLineDrawer(canvas, gc);
 
         canvas.setOnMouseEntered(event -> {
             System.out.println("hay un canvas");
@@ -75,12 +78,19 @@ public class GUI {
         hbox.setSpacing(10);
         hbox.setStyle("-fx-background-color: #336699;");
 
-        Button buttonCurrent = new Button("Run");
-        buttonCurrent.setPrefSize(100, 20);
+        Button buttonRun = new Button("Run");
+        buttonRun.setPrefSize(100, 20);
 
-        Button buttonProjected = new Button("Save");
-        buttonProjected.setPrefSize(100, 20);
-        hbox.getChildren().addAll(buttonCurrent, buttonProjected);
+        Button buttonSave = new Button("Save");
+        buttonSave.setPrefSize(100, 20);
+        buttonSave.setOnMouseClicked(event -> {
+            System.out.println("skere");
+        });
+
+        Button buttonClear = new Button("Clear");
+        buttonClear.setPrefSize(100, 20);
+
+        hbox.getChildren().addAll(buttonRun, buttonSave, buttonClear);
 
         return hbox;
     }
