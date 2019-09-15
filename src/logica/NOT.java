@@ -6,6 +6,7 @@ public class NOT extends Gate{
 
     public NOT() {
         super();
+        this.path = "./src/GateImages/NOT.png";
         this.input = false;
         this.prev = null;
     }

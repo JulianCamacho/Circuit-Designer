@@ -1,5 +1,9 @@
 package logica;
 
+import javafx.scene.image.Image;
+
+import java.net.MalformedURLException;
+
 public class XOR extends Gate {
     private boolean input1;
     private boolean input2;
@@ -8,6 +12,7 @@ public class XOR extends Gate {
 
     public XOR() {
         super();
+        this.path = "./src/GateImages/XOR.png";
         this.input1 = false;
         this.input2 = false;
         this.prev1 = null;
@@ -25,4 +30,5 @@ public class XOR extends Gate {
         }
         return XORresult;
     }
+
 }

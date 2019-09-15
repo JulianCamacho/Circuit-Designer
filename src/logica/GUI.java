@@ -47,6 +47,7 @@ public class GUI {
         root.setTop(myHBox);
 
         GraphicsContext gc = canvas.getGraphicsContext2D();
+
         gc.setFill(Color.BLUE);
 
         primaryStage.setScene(scene);

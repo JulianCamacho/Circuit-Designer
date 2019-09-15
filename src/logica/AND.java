@@ -1,6 +1,11 @@
 package logica;
 
-public class AND extends Gate{
+import javafx.scene.image.Image;
+
+import java.io.File;
+import java.net.MalformedURLException;
+
+public class AND extends Gate {
     private boolean input1;
     private boolean input2;
     private Gate prev1;
@@ -8,6 +13,7 @@ public class AND extends Gate{
 
     public AND() {
         super();
+        this.path = ("./src/GateImages/AND.png");
         this.input1 = false;
         this.input2 = false;
         this.prev1 = null;

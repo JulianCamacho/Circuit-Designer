@@ -6,7 +6,6 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.FlowPane;
 
-import java.io.File;
 import java.net.MalformedURLException;
 
 public class MyFlowPane {
@@ -16,32 +15,32 @@ public class MyFlowPane {
 
     private void loadImages() throws MalformedURLException {
         //AND Image
-        File file1 = new File("./src/GateImages/AND.png");
-        this.ANDimage = new Image(file1.toURI().toURL().toString());
+        Gate ImageAND = new AND();
+        this.ANDimage = ImageAND.loadGateImage();
 
         //NAND Image
-        File file2 = new File("./src/GateImages/NAND.png");
-        this.NANDimage = new Image(file2.toURI().toURL().toString());
+        Gate ImageNAND = new NAND();
+        this.NANDimage = ImageNAND.loadGateImage();
 
         //OR Image
-        File file3 = new File("./src/GateImages/OR.png");
-        this.ORimage = new Image(file3.toURI().toURL().toString());
+        Gate ImageOR = new OR();
+        this.ORimage = ImageOR.loadGateImage();
 
         //NOR Image
-        File file4 = new File("./src/GateImages/NOR.png");
-        this.NORimage = new Image(file4.toURI().toURL().toString());
+        Gate ImageNOR = new NOR();
+        this.NORimage = ImageNOR.loadGateImage();
 
         //XOR Image
-        File file5 = new File("./src/GateImages/XOR.png");
-        this.XORimage = new Image(file5.toURI().toURL().toString());
+        Gate ImageXOR = new XOR();
+        this.XORimage = ImageXOR.loadGateImage();
 
         //XNOR Image
-        File file6 = new File("./src/GateImages/XNOR.png");
-        this.XNORimage = new Image(file6.toURI().toURL().toString());
+        Gate ImageXNOR = new XNOR();
+        this.XNORimage = ImageXNOR.loadGateImage();
 
         //NOT Image
-        File file7 = new File("./src/GateImages/NOT.png");
-        this.NOTimage = new Image(file7.toURI().toURL().toString());
+        Gate ImageNOT = new NOT();
+        this.NOTimage = ImageNOT.loadGateImage();
     }
 
     /**

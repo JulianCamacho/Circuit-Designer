@@ -8,6 +8,7 @@ public class XNOR extends Gate {
 
     public XNOR() {
         super();
+        this.path = "./src/GateImages/XNOR.png";
         this.input1 = false;
         this.input2 = false;
         this.prev1 = null;

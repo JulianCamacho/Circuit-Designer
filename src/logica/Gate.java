@@ -1,19 +1,23 @@
 package logica;
 
 import javafx.scene.image.Image;
+
+import java.io.File;
+import java.net.MalformedURLException;
+
 /**
  * Clase Gate: clase abstracta, súper clase o Padre de todas las compuertas lógicas
  * */
 
 public abstract class Gate {
-    private Image image;
-    private String path;
-    private boolean output;
+    protected Image image;
+    protected String path;
+    protected boolean output;
 
     public Gate (){
-        this.image = null;
-        this.path = null;
-        this.output = false;
+        //this.image = null;
+        //this.path = null;
+        //this.output = false;
     }
 
     /**
@@ -23,6 +27,13 @@ public abstract class Gate {
     public boolean logic(){
          return false;
     }
+
+    public Image loadGateImage() throws MalformedURLException {
+        File file1 = new File(path);
+        Image loadedImage = new Image(file1.toURI().toURL().toString());
+        return loadedImage;
+    }
+
     /**
      * Getters and Setters
      * */

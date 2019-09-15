@@ -98,6 +98,7 @@ public class DragAndDropFeature {
                 if (db.hasImage()) {
                     switch (gateType) {
                         case AND: {
+                            GateFactory.getGate(GateType.AND);
                             gc.drawImage(myFlowPane.getANDimage(), event.getX()-22, event.getY()-15);
                             success = true; event.setDropCompleted(success);
                             event.consume();
