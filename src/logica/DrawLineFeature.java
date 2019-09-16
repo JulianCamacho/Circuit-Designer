@@ -7,7 +7,7 @@ import javafx.scene.paint.Color;
 
 public class DrawLineFeature {
 
-    public void myLineDrawer(Canvas canvas, GraphicsContext gc) {
+    public static void myLineDrawer(Canvas canvas, GraphicsContext gc) {
         canvas.addEventHandler(MouseEvent.MOUSE_PRESSED, event -> {
             gc.setLineWidth(1.7);
             gc.beginPath();
@@ -28,7 +28,7 @@ public class DrawLineFeature {
     /**
      * Método randomColor: genera un color aleatorio a partir de valores rgb.
      */
-    public Color randomColor() {
+    public static Color randomColor() {
         int r = (int) (0xff * Math.random());
         int g = (int) (0xff * Math.random());
         int b = (int) (0xff * Math.random());

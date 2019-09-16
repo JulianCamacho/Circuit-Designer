@@ -4,7 +4,7 @@ import javafx.scene.canvas.GraphicsContext;
 
 public class CanvasGrid {
 
-    public void drawGrid(GraphicsContext gc){
+    public static void drawGrid(GraphicsContext gc){
         for(int i = 0; i < 1200; i += 35) {
            gc.setLineWidth(0.3);
            gc.strokeLine(i, 0, i, 720);

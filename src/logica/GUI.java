@@ -48,11 +48,9 @@ public class GUI {
         DragAndDropFeature dragdrop = new DragAndDropFeature();
         dragdrop.myDragAndDrop(myFlowPane, canvas, gc);
 
-        DrawLineFeature drawLine = new DrawLineFeature();
-        drawLine.myLineDrawer(canvas, gc);
+        DrawLineFeature.myLineDrawer(canvas, gc);
 
-        CanvasGrid canvasGrid = new CanvasGrid();
-        canvasGrid.drawGrid(gc);
+        CanvasGrid.drawGrid(gc);
 
         return primaryStage;
     }
@@ -73,6 +71,7 @@ public class GUI {
         buttonSave.setPrefSize(100, 20);
         buttonSave.setOnMouseClicked(event -> {
             System.out.println("skere");
+            AlertBox.displayAlertBox("Demasiado flow", "Stop");
         });
 
         Button buttonClear = new Button("Clear");
@@ -82,9 +81,8 @@ public class GUI {
         buttonTable.setPrefSize(100, 20);
         buttonTable.setOnMouseClicked(event -> {
             System.out.println("skuuu");
-            TableWindow tableWindow = new TableWindow();
             try {
-                tableWindow.createTableWindow();
+                TableWindow.createTableWindow();
             } catch (MalformedURLException e) {
                 e.printStackTrace();
             }
