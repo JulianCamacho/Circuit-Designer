@@ -98,40 +98,40 @@ public class DragAndDropFeature {
                 if (db.hasImage()) {
                     switch (gateType) {
                         case AND: {
-                            GateFactory.getGate(GateType.AND);
-                            gc.drawImage(myFlowPane.getANDimage(), event.getX()-22, event.getY()-15);
+                            //GateFactory.getGate(GateType.AND);
+                            gc.drawImage(myFlowPane.getANDimage(), event.getX()-32, event.getY()-15);
                             success = true; event.setDropCompleted(success);
                             event.consume();
                             break;
                         }
                         case NAND: {
-                            gc.drawImage(myFlowPane.getNANDimage(), event.getX()-22, event.getY()-15);
+                            gc.drawImage(myFlowPane.getNANDimage(), event.getX()-32, event.getY()-15);
                             success = true; event.setDropCompleted(success);
                             event.consume();
                             break;
                         }
                         case OR: {
-                            gc.drawImage(myFlowPane.getORimage(), event.getX()-22, event.getY()-15);
+                            gc.drawImage(myFlowPane.getORimage(), event.getX()-32, event.getY()-15);
                             success = true; event.setDropCompleted(success);
                             event.consume(); break;
                         }
                         case NOR: {
-                            gc.drawImage(myFlowPane.getNORimage(), event.getX()-22, event.getY()-15);
+                            gc.drawImage(myFlowPane.getNORimage(), event.getX()-32, event.getY()-15);
                             success = true; event.setDropCompleted(success);
                             event.consume(); break;
                         }
                         case XOR: {
-                            gc.drawImage(myFlowPane.getXORimage(), event.getX()-22, event.getY()-15);
+                            gc.drawImage(myFlowPane.getXORimage(), event.getX()-32, event.getY()-15);
                             success = true; event.setDropCompleted(success);
                             event.consume(); break;
                         }
                         case XNOR: {
-                            gc.drawImage(myFlowPane.getXNORimage(), event.getX()-22, event.getY()-15);
+                            gc.drawImage(myFlowPane.getXNORimage(), event.getX()-32, event.getY()-15);
                             success = true; event.setDropCompleted(success);
                             event.consume(); break;
                         }
                         case NOT: {
-                            gc.drawImage(myFlowPane.getNOTimage(), event.getX()-22, event.getY()-15);
+                            gc.drawImage(myFlowPane.getNOTimage(), event.getX()-32, event.getY()-15);
                             success = true; event.setDropCompleted(success);
                             event.consume(); break;
                         }

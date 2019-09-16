@@ -5,12 +5,11 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.input.*;
 import javafx.scene.paint.Color;
 
-import java.util.Random;
-
 public class DrawLineFeature {
 
     public void myLineDrawer(Canvas canvas, GraphicsContext gc) {
         canvas.addEventHandler(MouseEvent.MOUSE_PRESSED, event -> {
+            gc.setLineWidth(1.7);
             gc.beginPath();
             gc.moveTo(event.getX(), event.getY());
             gc.stroke();
@@ -26,7 +25,9 @@ public class DrawLineFeature {
         });
     }
 
-    // generate the random integers for r, g and b value
+    /**
+     * Método randomColor: genera un color aleatorio a partir de valores rgb.
+     */
     public Color randomColor() {
         int r = (int) (0xff * Math.random());
         int g = (int) (0xff * Math.random());

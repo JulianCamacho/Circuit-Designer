@@ -49,9 +49,9 @@ public class MyFlowPane {
     public FlowPane addFlowPane() throws MalformedURLException {
         loadImages();
         this.flow.setPadding(new Insets(5, 0, 5, 0));
-        this.flow.setVgap(4);
+        this.flow.setVgap(10);
         this.flow.setHgap(4);
-        this.flow.setAlignment(Pos.TOP_CENTER);
+        this.flow.setAlignment(Pos.CENTER);
         this.flow.setPrefWrapLength(170); // preferred width allows for two columns
         this.flow.setStyle("-fx-background-color: DAE6F3;");
 

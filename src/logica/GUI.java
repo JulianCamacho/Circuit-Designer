@@ -1,26 +1,14 @@
 package logica;
 
-import javafx.event.EventHandler;
-import javafx.event.EventType;
 import javafx.geometry.Insets;
-import javafx.geometry.Pos;
-import javafx.scene.Group;
-import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Button;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-import javafx.scene.input.*;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
-
-import java.io.File;
 import java.net.MalformedURLException;
-import java.util.ArrayList;
-import java.util.List;
 
 public class GUI {
 
@@ -36,7 +24,12 @@ public class GUI {
         Pane wrapperPane = new Pane();
         root.setCenter(wrapperPane);
         // Put canvas in the center of the window
-        Canvas canvas = new Canvas(630, 550);
+        Canvas canvas = new Canvas(1280, 720);
+
+        canvas.setOnMouseEntered(event -> {
+            System.out.println("Aquí hay canvas");
+        });
+
 
         wrapperPane.getChildren().add(canvas);
 
@@ -47,7 +40,6 @@ public class GUI {
         root.setTop(myHBox);
 
         GraphicsContext gc = canvas.getGraphicsContext2D();
-
         gc.setFill(Color.BLUE);
 
         primaryStage.setScene(scene);
@@ -59,16 +51,11 @@ public class GUI {
         DrawLineFeature drawLine = new DrawLineFeature();
         drawLine.myLineDrawer(canvas, gc);
 
-        canvas.setOnMouseEntered(event -> {
-            System.out.println("hay un canvas");
-            event.consume();
-        });
-
-
+        CanvasGrid canvasGrid = new CanvasGrid();
+        canvasGrid.drawGrid(gc);
 
         return primaryStage;
     }
-
 
     /**
      * Método para obtener un HBox personalizado
@@ -91,19 +78,22 @@ public class GUI {
         Button buttonClear = new Button("Clear");
         buttonClear.setPrefSize(100, 20);
 
-        hbox.getChildren().addAll(buttonRun, buttonSave, buttonClear);
+        Button buttonTable = new Button("Generate Truth Table");
+        buttonTable.setPrefSize(100, 20);
+        buttonTable.setOnMouseClicked(event -> {
+            System.out.println("skuuu");
+            TableWindow tableWindow = new TableWindow();
+            try {
+                tableWindow.createTableWindow();
+            } catch (MalformedURLException e) {
+                e.printStackTrace();
+            }
+
+        });
+
+        hbox.getChildren().addAll(buttonRun, buttonSave, buttonClear, buttonTable);
 
         return hbox;
-    }
-
-    /**
-     * Método para obtener un VBox personalizado
-     * */
-    private static VBox addVBox() {
-        VBox vbox = new VBox();
-        vbox.setPadding(new Insets(10));
-        vbox.setSpacing(8);
-        return vbox;
     }
 
 }
