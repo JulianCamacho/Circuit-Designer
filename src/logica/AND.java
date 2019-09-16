@@ -1,8 +1,8 @@
 package logica;
 
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 
-import java.io.File;
 import java.net.MalformedURLException;
 
 public class AND extends Gate {
@@ -11,14 +11,19 @@ public class AND extends Gate {
     private Gate prev1;
     private Gate prev2;
 
-    public AND() {
+
+    public AND() throws MalformedURLException {
         super();
         this.path = ("./src/GateImages/AND.png");
+        this.image = loadGateImage();
+        this.imageView = super.setImageView();
         this.input1 = false;
         this.input2 = false;
         this.prev1 = null;
         this.prev2 = null;
+        canvasDragAndDrop(GUI.canvas, GUI.gc);
     }
+
 
     @Override
     public boolean logic() {
@@ -31,4 +36,6 @@ public class AND extends Gate {
         }
         return ANDresult;
     }
+
+
 }

@@ -22,6 +22,7 @@ public class DrawLineFeature {
         });
 
         canvas.addEventHandler(MouseEvent.MOUSE_RELEASED, event -> {
+            event.consume();
         });
     }
 

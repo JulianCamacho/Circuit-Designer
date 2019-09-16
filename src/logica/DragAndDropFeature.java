@@ -7,19 +7,33 @@ import javafx.scene.input.ClipboardContent;
 import javafx.scene.input.DragEvent;
 import javafx.scene.input.Dragboard;
 import javafx.scene.input.TransferMode;
+import javafx.scene.layout.Pane;
 
 import java.awt.*;
+import java.net.MalformedURLException;
 
 public class DragAndDropFeature {
 
     private GateType gateType;
+    private AND and = new AND();
+    private NAND nand = new NAND();
+    private OR or = new OR();
+    private NOR nor = new NOR();
+    private XOR xor = new XOR();
+    private XNOR xnor = new XNOR();
+    private NOT not = new NOT();
+
+    public DragAndDropFeature() throws MalformedURLException {
+    }
+
     /**
      * Event Handlers para el Drag & Drop
-     * */
+     */
     public void myDragAndDrop(MyFlowPane myFlowPane, Canvas canvas, GraphicsContext gc) {
         myFlowPane.getiV1().setOnDragDetected(event -> {
             Dragboard db = myFlowPane.getiV1().startDragAndDrop(TransferMode.ANY);
-            ClipboardContent content = new ClipboardContent(); content.putImage(myFlowPane.getANDimage());
+            ClipboardContent content = new ClipboardContent();
+            content.putImage(and.getImage());
             db.setContent(content);
             gateType = GateType.AND;
             event.consume();
@@ -27,7 +41,8 @@ public class DragAndDropFeature {
 
         myFlowPane.getiV2().setOnDragDetected(event -> {
             Dragboard db = myFlowPane.getiV2().startDragAndDrop(TransferMode.ANY);
-            ClipboardContent content = new ClipboardContent(); content.putImage(myFlowPane.getNANDimage());
+            ClipboardContent content = new ClipboardContent();
+            content.putImage(nand.getImage());
             db.setContent(content);
             gateType = GateType.NAND;
             event.consume();
@@ -35,7 +50,8 @@ public class DragAndDropFeature {
 
         myFlowPane.getiV3().setOnDragDetected(event -> {
             Dragboard db = myFlowPane.getiV3().startDragAndDrop(TransferMode.ANY);
-            ClipboardContent content = new ClipboardContent(); content.putImage(myFlowPane.getORimage());
+            ClipboardContent content = new ClipboardContent();
+            content.putImage(or.getImage());
             db.setContent(content);
             gateType = GateType.OR;
             event.consume();
@@ -43,7 +59,8 @@ public class DragAndDropFeature {
 
         myFlowPane.getiV4().setOnDragDetected(event -> {
             Dragboard db = myFlowPane.getiV4().startDragAndDrop(TransferMode.ANY);
-            ClipboardContent content = new ClipboardContent(); content.putImage(myFlowPane.getNORimage());
+            ClipboardContent content = new ClipboardContent();
+            content.putImage(nor.getImage());
             db.setContent(content);
             gateType = GateType.NOR;
             event.consume();
@@ -51,7 +68,8 @@ public class DragAndDropFeature {
 
         myFlowPane.getiV5().setOnDragDetected(event -> {
             Dragboard db = myFlowPane.getiV5().startDragAndDrop(TransferMode.ANY);
-            ClipboardContent content = new ClipboardContent(); content.putImage(myFlowPane.getXORimage());
+            ClipboardContent content = new ClipboardContent();
+            content.putImage(xor.getImage());
             db.setContent(content);
             gateType = GateType.XOR;
             event.consume();
@@ -59,7 +77,8 @@ public class DragAndDropFeature {
 
         myFlowPane.getiV6().setOnDragDetected(event -> {
             Dragboard db = myFlowPane.getiV6().startDragAndDrop(TransferMode.ANY);
-            ClipboardContent content = new ClipboardContent(); content.putImage(myFlowPane.getXNORimage());
+            ClipboardContent content = new ClipboardContent();
+            content.putImage(xnor.getImage());
             db.setContent(content);
             gateType = GateType.XNOR;
             event.consume();
@@ -67,13 +86,14 @@ public class DragAndDropFeature {
 
         myFlowPane.getiV7().setOnDragDetected(event -> {
             Dragboard db = myFlowPane.getiV7().startDragAndDrop(TransferMode.ANY);
-            ClipboardContent content = new ClipboardContent(); content.putImage(myFlowPane.getNOTimage());
+            ClipboardContent content = new ClipboardContent();
+            content.putImage(not.getImage());
             db.setContent(content);
             gateType = GateType.NOT;
             event.consume();
         });
 
-        canvas.setOnDragOver(new EventHandler <DragEvent>() {
+        canvas.setOnDragOver(new EventHandler<DragEvent>() {
             public void handle(DragEvent event) {
                 /* accept it only if it is  not dragged from the same node
                  * and if it has a string data */
@@ -88,56 +108,57 @@ public class DragAndDropFeature {
 
         canvas.setOnDragDropped(new EventHandler<DragEvent>() {
             public void handle(DragEvent event) {
-                int xMouse = (MouseInfo.getPointerInfo().getLocation().x - 320);
-                int yMouse = (MouseInfo.getPointerInfo().getLocation().y - 150);
-                System.out.println(xMouse);
-                System.out.println(yMouse);
                 System.out.println("onDragDropped");
                 Dragboard db = event.getDragboard();
                 boolean success;
                 if (db.hasImage()) {
                     switch (gateType) {
                         case AND: {
-                            //GateFactory.getGate(GateType.AND);
-                            gc.drawImage(myFlowPane.getANDimage(), event.getX()-32, event.getY()-15);
-                            success = true; event.setDropCompleted(success);
-                            event.consume();
+                            gc.drawImage(and.getImage(), event.getX() - 35, event.getY() - 15);
                             break;
                         }
                         case NAND: {
-                            gc.drawImage(myFlowPane.getNANDimage(), event.getX()-32, event.getY()-15);
-                            success = true; event.setDropCompleted(success);
-                            event.consume();
+                            gc.drawImage(nand.getImage(), event.getX() - 35, event.getY() - 15);
+
                             break;
                         }
                         case OR: {
-                            gc.drawImage(myFlowPane.getORimage(), event.getX()-32, event.getY()-15);
-                            success = true; event.setDropCompleted(success);
-                            event.consume(); break;
+                            gc.drawImage(or.getImage(), event.getX() - 35, event.getY() - 15);
+                            success = true;
+                            event.setDropCompleted(success);
+                            event.consume();
+                            break;
                         }
                         case NOR: {
-                            gc.drawImage(myFlowPane.getNORimage(), event.getX()-32, event.getY()-15);
-                            success = true; event.setDropCompleted(success);
-                            event.consume(); break;
+                            gc.drawImage(nor.getImage(), event.getX() - 35, event.getY() - 15);
+
+                            break;
                         }
                         case XOR: {
-                            gc.drawImage(myFlowPane.getXORimage(), event.getX()-32, event.getY()-15);
-                            success = true; event.setDropCompleted(success);
-                            event.consume(); break;
+                            gc.drawImage(xor.getImage(), event.getX() - 35, event.getY() - 15);
+
+                            break;
                         }
                         case XNOR: {
-                            gc.drawImage(myFlowPane.getXNORimage(), event.getX()-32, event.getY()-15);
-                            success = true; event.setDropCompleted(success);
-                            event.consume(); break;
+                            gc.drawImage(xnor.getImage(), event.getX() - 35, event.getY() - 15);
+
+                            break;
                         }
                         case NOT: {
-                            gc.drawImage(myFlowPane.getNOTimage(), event.getX()-32, event.getY()-15);
-                            success = true; event.setDropCompleted(success);
-                            event.consume(); break;
+                            gc.drawImage(not.getImage(), event.getX() - 35, event.getY() - 15);
+
+                            break;
                         }
                     }
+                    success = true;
+                    event.setDropCompleted(success);
+                    event.consume();
                 }
             }
         });
     }
+
+        public static boolean avoidOverlap (Canvas canvas, GraphicsContext gc){
+            return false;
+        }
 }

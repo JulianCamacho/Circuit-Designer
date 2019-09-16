@@ -1,8 +1,10 @@
 package logica;
 
+import java.net.MalformedURLException;
+
 public class GateFactory {
 
-    public static Gate getGate(GateType gt){
+    public static Gate getGate(GateType gt) throws MalformedURLException {
         if (gt == GateType.AND){
             return new AND();
         }
