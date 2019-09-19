@@ -1,19 +1,24 @@
-package logica;
+package Interface;
 
+import Gates.*;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.FlowPane;
 
 import java.net.MalformedURLException;
 
+/**
+ * Clase para crear un FLowPane personalizado y de acuerdo con las necesidades.
+ */
 public class MyFlowPane {
+
     private ImageView iV1, iV2, iV3, iV4, iV5, iV6, iV7;
     private FlowPane flow = new FlowPane();
 
     /**
-     * Método para cargar las imágenes desde donde de hace el Drag & Drop, en el FLowPane
+     * Método para cargar las imágenes y generar ImageViews desde donde de hace el Drag & Drop, en el FLowPane.
+     * @throws MalformedURLException
      */
     private void loadImages() throws MalformedURLException {
         AND ImageAND = new AND();
@@ -35,40 +40,14 @@ public class MyFlowPane {
         this.iV6 = ImageXNOR.getImageView(); iV6.setFitWidth(80); iV6.setFitHeight(40);
 
         NOT ImageNOT = new NOT();
-        this.iV7 = ImageNOT.getImageView(); iV7.setFitWidth(80); iV7.setFitHeight(40);/*
-        //AND Image
-        AND.getImage();
-
-        //NAND Image
-        Gate ImageNAND = new NAND();
-        this.NANDimage = ImageNAND.getImage();
-
-        //OR Image
-        Gate ImageOR = new OR();
-        this.ORimage = ImageOR.getImage();
-
-        //NOR Image
-        Gate ImageNOR = new NOR();
-        this.NORimage = ImageNOR.getImage();
-
-        //XOR Image
-        Gate ImageXOR = new XOR();
-        this.XORimage = ImageXOR.getImage();
-
-        //XNOR Image
-        Gate ImageXNOR = new XNOR();
-        this.XNORimage = ImageXNOR.getImage();
-
-        //NOT Image
-        Gate ImageNOT = new NOT();
-        this.NOTimage = ImageNOT.getImage();
-    }*/
+        this.iV7 = ImageNOT.getImageView(); iV7.setFitWidth(80); iV7.setFitHeight(40);
     }
 
-
     /**
-     * Método para obtener un FlowPane personalizado
-     * */
+     * Método para obtener un FlowPane personalizado.
+     * @return FlowPane - Panel con las características implementadas.
+     * @throws MalformedURLException
+     */
     public FlowPane addFlowPane() throws MalformedURLException {
         loadImages();
         this.flow.setPadding(new Insets(5, 0, 5, 0));
@@ -78,16 +57,10 @@ public class MyFlowPane {
         this.flow.setPrefWrapLength(150); // preferred width allows for two columns
         this.flow.setStyle("-fx-background-color: DAE6F3;");
 
-        /**
-         * Método para dibujar las imágenes de las compuertas como ImageView en el FlowPane
-         * */
-
         this.flow.getChildren().addAll(iV1, iV2, iV3, iV4, iV5, iV6, iV7);
 
         return flow;
     }
-
-    //Getters and setters
 
     public ImageView getiV1() { return iV1; }
 

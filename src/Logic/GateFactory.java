@@ -1,9 +1,21 @@
-package logica;
+package Logic;
+
+import Gates.*;
+import Interface.AlertBox;
 
 import java.net.MalformedURLException;
 
+/**
+ * Clase generadora de compuertas.
+ */
 public class GateFactory {
 
+    /**
+     * Método para solicitar una compuerta específica.
+     * @param gt - Tipo do de compuerta que se solicita crear.
+     * @return Gate - Compuerta solicitada.
+     * @throws MalformedURLException
+     */
     public static Gate getGate(GateType gt) throws MalformedURLException {
         if (gt == GateType.AND){
             return new AND();
@@ -27,7 +39,7 @@ public class GateFactory {
             return new NOT();
         }
         else{
-            System.out.println("Unknown logic gate");
+            AlertBox.displayAlertBox("Unknown gate", "Couldn´t create the specified Gate");
         }
         return null;
     }

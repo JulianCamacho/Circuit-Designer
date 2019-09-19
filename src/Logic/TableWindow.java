@@ -1,4 +1,4 @@
-package logica;
+package Logic;
 
 import javafx.geometry.Insets;
 import javafx.scene.Scene;

@@ -1,9 +1,13 @@
 package DoublyLinkedList_Pack;
 
+import Logic.Gate;
+
+import java.net.MalformedURLException;
+
 public class DoublyLinkedList<T>{
     private int length;
-    private Node first;
-    private Node last;
+    private Gate first;
+    private Gate last;
 
     public DoublyLinkedList(){
         this.length = 0;
@@ -15,35 +19,34 @@ public class DoublyLinkedList<T>{
         return this.length;
     }
 
-    public T getData(int index){
-        if (index > this.length-1 | this.first == null | index < 0){
+    public void getData(int index){
+        if (index > this.length-1 || this.first == null || index < 0){
             System.out.println("Index out of range");
-            return null;
+            //return null;
         }
         else{
             int counter = 0;
-            Node current = this.first;
+            Gate current = this.first;
             while(counter < index){
                 current = current.next;
                 counter ++;
             }
-            System.out.println(current.getData());
-            return (T) current.getData();
+            System.out.println(current);
         }
     }
 
-    public void setData(int index, T data){
+    public void setData(int index, String name){
         if (index > this.length-1 | this.first == null | index < 0){
             System.out.println("Index out of range");
         }
         else{
             int counter = 0;
-            Node current = this.first;
+            Gate current = this.first;
             while(counter < index){
                 current = current.next;
                 counter ++;
             }
-            current.setData(data);
+            current.setName(name);
         }
     }
 
@@ -53,14 +56,14 @@ public class DoublyLinkedList<T>{
             System.out.println("[]");
         }
         else {
-            Node current = this.first;
+            Gate current = this.first;
             System.out.print("[");
             while (current.next != null) {
-                System.out.print(current.getData());
+                System.out.print(current.getName());
                 System.out.print(", ");
                 current = current.next;
             }
-            System.out.print(current.getData());
+            System.out.print(current.getName());
             System.out.println("]");
         }
     }
@@ -70,43 +73,44 @@ public class DoublyLinkedList<T>{
             System.out.print("[]");
         }
         else{
-            Node current = this.last;
+            Gate current = this.last;
             System.out.print("[");
             while(current.prev != null){
-                System.out.print(current.getData());
+                System.out.print(current.getName());
                 System.out.print(", ");
                 current = current.prev;
             }
-            System.out.print(current.getData());
+            System.out.print(current.getName());
             System.out.print("]");
         }
     }
 
-    public void addLast(T data){
+    public void addLast(Gate addedGate) throws MalformedURLException {
         this.length ++;
         if (this.first == null){
-            this.first = new Node(data);
+            this.first = addedGate;
             this.last = this.first;
+            System.out.println("Done");
         }
         else {
-            Node newNode = new Node(data);
-            this.last.next = newNode;
-            newNode.prev = this.last;
-            this.last = newNode;
+            Gate newGate = addedGate;
+            this.last.next = newGate;
+            newGate.prev = this.last;
+            this.last = newGate;
         }
     }
 
-    public void addFirst(T data){
+    public void addFirst(Gate addedGate) throws MalformedURLException {
         this.length ++;
         if (this.first == null){
-            this.first = new Node(data);
+            this.first = addedGate;
             this.last = this.first;
         }
         else {
-            Node newNode = new Node(data);
-            this.first.prev = newNode;
-            newNode.next = this.first;
-            this.first = newNode;
+            Gate newGate = addedGate;
+            this.first.prev = newGate;
+            newGate.next = this.first;
+            this.first = newGate;
         }
     }
 
@@ -121,7 +125,7 @@ public class DoublyLinkedList<T>{
         }
         else {
             this.length --;
-            Node before = this.last.prev;
+            Gate before = this.last.prev;
             this.last.prev.next = null;
             this.last = before;
         }
@@ -139,7 +143,7 @@ public class DoublyLinkedList<T>{
         }
         else {
             this.length --;
-            Node after = this.first.next;
+            Gate after = this.first.next;
             this.first.next.prev = null;
             this.first = after;
         }

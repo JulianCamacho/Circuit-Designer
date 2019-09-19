@@ -1,9 +1,17 @@
-package logica;
+package Interface;
 
 import javafx.scene.control.Alert;
 
+/**
+ *Clase para generar JavaFX AlertBoxes.
+ */
 public class AlertBox {
 
+    /**
+     * Método que crea un AlerBox personalizado, ideal para manejo de excepciones.
+     * @param title - Título de la ventana emergente.
+     * @param message - Mensaje que se incluirá en la ventana.
+     */
     public static void displayAlertBox(String title, String message){
         Alert alert = new Alert(Alert.AlertType.WARNING);
         alert.setTitle(title);
