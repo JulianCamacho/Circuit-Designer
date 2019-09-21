@@ -38,6 +38,12 @@ public class GateFactory {
         if (gt == GateType.NOT){
             return new NOT();
         }
+        if (gt == GateType.TRUE){
+            return new TrueGate();
+        }
+        if (gt == GateType.FALSE){
+            return new FalseGate();
+        }
         else{
             AlertBox.displayAlertBox("Unknown gate", "Couldn´t create the specified Gate");
         }

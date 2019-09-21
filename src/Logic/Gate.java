@@ -1,5 +1,8 @@
 package Logic;
 
+import javafx.geometry.Pos;
+import javafx.scene.Cursor;
+import javafx.scene.Group;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
@@ -7,8 +10,12 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.ClipboardContent;
 import javafx.scene.input.Dragboard;
 import javafx.scene.input.TransferMode;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
+import javafx.scene.paint.Color;
 import javafx.scene.paint.ImagePattern;
+import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
 
 import java.io.File;
@@ -62,6 +69,21 @@ public abstract class Gate{
         imageV1.setFitHeight(30);
         imageView = imageV1;
         return imageV1;
+    }
+
+    public void createGateInterface(Pane wrapperPane, double posX, double posY){
+        Rectangle gateInterface = new Rectangle( posX, posY, 80, 30);
+        gateInterface.setFill(new ImagePattern(this.getImage()));
+        Circle gateIn1 = new Circle(posX + 5, posY + 9, 7);
+        gateIn1.setFill(Color.TRANSPARENT);
+        gateIn1.setCursor(Cursor.CROSSHAIR);
+        Circle gateIn2 = new Circle(posX + 5, posY + 22, 7);
+        gateIn2.setFill(Color.BLACK);
+        gateIn2.setCursor(Cursor.CROSSHAIR);
+        Circle gateOut = new Circle(posX + 70, posY + 15 , 7);
+        gateOut.setFill(Color.BLACK);
+        gateOut.setCursor(Cursor.CROSSHAIR);
+        wrapperPane.getChildren().addAll(gateInterface, gateIn1, gateIn2, gateOut);
     }
 
     public void canvasDragAndDrop(Pane wrapperPane) {

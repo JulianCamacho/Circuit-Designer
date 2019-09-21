@@ -1,15 +1,11 @@
 package Interface;
 
 import Gates.*;
-import Interface.DrawLineFeature;
-import Interface.GUI;
-import Interface.MyFlowPane;
+
 import Logic.Gate;
 import Logic.GateFactory;
 import Logic.GateType;
-import Logic.MoveAndDropFeature;
-import javafx.scene.canvas.Canvas;
-import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.Cursor;
 import javafx.scene.control.Label;
 import javafx.scene.input.ClipboardContent;
 import javafx.scene.input.Dragboard;
@@ -33,6 +29,8 @@ public class DragAndDropFeature {
     private XOR xor = new XOR();
     private XNOR xnor = new XNOR();
     private NOT not = new NOT();
+    private TrueGate trueGate = new TrueGate();
+    private FalseGate falseGate = new FalseGate();
 
     public DragAndDropFeature() throws MalformedURLException {
     }
@@ -48,6 +46,7 @@ public class DragAndDropFeature {
             ClipboardContent content = new ClipboardContent();
             content.putImage(and.getImage());
             db.setContent(content);
+            myFlowPane.getiV1().setCursor(Cursor.CLOSED_HAND);
             gateType = GateType.AND;
             event.consume();
         });
@@ -57,6 +56,7 @@ public class DragAndDropFeature {
             ClipboardContent content = new ClipboardContent();
             content.putImage(nand.getImage());
             db.setContent(content);
+            myFlowPane.getiV2().setCursor(Cursor.CLOSED_HAND);
             gateType = GateType.NAND;
             event.consume();
         });
@@ -66,6 +66,7 @@ public class DragAndDropFeature {
             ClipboardContent content = new ClipboardContent();
             content.putImage(or.getImage());
             db.setContent(content);
+            myFlowPane.getiV3().setCursor(Cursor.CLOSED_HAND);
             gateType = GateType.OR;
             event.consume();
         });
@@ -75,6 +76,7 @@ public class DragAndDropFeature {
             ClipboardContent content = new ClipboardContent();
             content.putImage(nor.getImage());
             db.setContent(content);
+            myFlowPane.getiV4().setCursor(Cursor.CLOSED_HAND);
             gateType = GateType.NOR;
             event.consume();
         });
@@ -84,6 +86,7 @@ public class DragAndDropFeature {
             ClipboardContent content = new ClipboardContent();
             content.putImage(xor.getImage());
             db.setContent(content);
+            myFlowPane.getiV5().setCursor(Cursor.CLOSED_HAND);
             gateType = GateType.XOR;
             event.consume();
         });
@@ -93,6 +96,7 @@ public class DragAndDropFeature {
             ClipboardContent content = new ClipboardContent();
             content.putImage(xnor.getImage());
             db.setContent(content);
+            myFlowPane.getiV6().setCursor(Cursor.CLOSED_HAND);
             gateType = GateType.XNOR;
             event.consume();
         });
@@ -102,7 +106,28 @@ public class DragAndDropFeature {
             ClipboardContent content = new ClipboardContent();
             content.putImage(not.getImage());
             db.setContent(content);
+            myFlowPane.getiV7().setCursor(Cursor.CLOSED_HAND);
             gateType = GateType.NOT;
+            event.consume();
+        });
+
+        myFlowPane.getiV8().setOnDragDetected(event -> {
+            Dragboard db = myFlowPane.getiV8().startDragAndDrop(TransferMode.ANY);
+            ClipboardContent content = new ClipboardContent();
+            content.putImage(trueGate.getImage());
+            db.setContent(content);
+            myFlowPane.getiV8().setCursor(Cursor.CLOSED_HAND);
+            gateType = GateType.TRUE;
+            event.consume();
+        });
+
+        myFlowPane.getiV9().setOnDragDetected(event -> {
+            Dragboard db = myFlowPane.getiV9().startDragAndDrop(TransferMode.ANY);
+            ClipboardContent content = new ClipboardContent();
+            content.putImage(falseGate.getImage());
+            db.setContent(content);
+            myFlowPane.getiV9().setCursor(Cursor.CLOSED_HAND);
+            gateType = GateType.FALSE;
             event.consume();
         });
 
@@ -139,12 +164,9 @@ public class DragAndDropFeature {
                         }
                         break; }
                     case NAND: {
-                        Gate newGate = null;
-                        Rectangle newRect = new Rectangle(event.getX() - 35, event.getY() - 15, 75, 30);
                         try {
-                            newGate = GateFactory.getGate(GateType.NAND);
-                            newRect.setFill(new ImagePattern(newGate.getImage()));
-                            wrapperPane.getChildren().add(newRect);
+                            Gate newGate = GateFactory.getGate(GateType.NAND);
+                            newGate.createGateInterface(wrapperPane, event.getX(), event.getY());
                         } catch (MalformedURLException e) {
                             e.printStackTrace();
                         }
@@ -153,11 +175,7 @@ public class DragAndDropFeature {
                     case OR: {
                         try {
                             Gate newGate = GateFactory.getGate(GateType.OR);
-                            Label newLabel = new Label();
-                            newLabel.setLayoutX(event.getX() - 35);
-                            newLabel.setLayoutY(event.getY() - 15);
-                            wrapperPane.getChildren().add(newLabel);
-
+                            newGate.createGateInterface(wrapperPane, event.getX(), event.getY());
                         } catch (MalformedURLException e) {
                             e.printStackTrace();
                         }
@@ -166,11 +184,7 @@ public class DragAndDropFeature {
                     case NOR: {
                         try {
                             Gate newGate = GateFactory.getGate(GateType.NOR);
-                            Label newLabel = new Label();
-                            newLabel.setLayoutX(event.getX() - 35);
-                            newLabel.setLayoutY(event.getY() - 15);
-                            wrapperPane.getChildren().add(newLabel);
-
+                            newGate.createGateInterface(wrapperPane, event.getX(), event.getY());
                         } catch (MalformedURLException e) {
                             e.printStackTrace();
                         }

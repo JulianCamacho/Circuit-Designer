@@ -10,5 +10,7 @@ public enum GateType {
     NOR,
     XOR,
     XNOR,
-    NOT;
+    NOT,
+    TRUE,
+    FALSE;
 }

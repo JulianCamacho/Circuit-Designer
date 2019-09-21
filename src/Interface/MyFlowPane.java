@@ -13,7 +13,7 @@ import java.net.MalformedURLException;
  */
 public class MyFlowPane {
 
-    private ImageView iV1, iV2, iV3, iV4, iV5, iV6, iV7;
+    private ImageView iV1, iV2, iV3, iV4, iV5, iV6, iV7, iV8, iV9;
     private FlowPane flow = new FlowPane();
 
     /**
@@ -41,6 +41,12 @@ public class MyFlowPane {
 
         NOT ImageNOT = new NOT();
         this.iV7 = ImageNOT.getImageView(); iV7.setFitWidth(80); iV7.setFitHeight(40);
+
+        TrueGate ImageTRUE = new TrueGate();
+        this.iV8 = ImageTRUE.getImageView(); iV8.setFitWidth(30); iV8.setFitHeight(30);
+
+        FalseGate ImageFALSE = new FalseGate();
+        this.iV9 = ImageFALSE.getImageView(); iV9.setFitWidth(30); iV9.setFitHeight(30);
     }
 
     /**
@@ -52,12 +58,12 @@ public class MyFlowPane {
         loadImages();
         this.flow.setPadding(new Insets(5, 0, 5, 0));
         this.flow.setVgap(10);
-        this.flow.setHgap(4);
-        this.flow.setAlignment(Pos.CENTER);
+        this.flow.setHgap(45);
+        this.flow.setAlignment(Pos.TOP_CENTER);
         this.flow.setPrefWrapLength(150); // preferred width allows for two columns
         this.flow.setStyle("-fx-background-color: DAE6F3;");
 
-        this.flow.getChildren().addAll(iV1, iV2, iV3, iV4, iV5, iV6, iV7);
+        this.flow.getChildren().addAll(iV1, iV2, iV3, iV4, iV5, iV6, iV7, iV8, iV9);
 
         return flow;
     }
@@ -75,6 +81,10 @@ public class MyFlowPane {
     public ImageView getiV6() { return iV6; }
 
     public ImageView getiV7() { return iV7; }
+
+    public ImageView getiV8() { return iV8; }
+
+    public ImageView getiV9() { return iV9; }
 
     public FlowPane getFlow() { return flow; }
 }
