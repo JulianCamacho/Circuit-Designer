@@ -16,7 +16,7 @@ public class CanvasGrid {
         for(int i = 0, j = 0; i < 1300; i += 35, j += 42.5) {
             VLine = new Line(j, 0, j, 1280);
             VLine.setStroke(Color.LIGHTGRAY);
-            HLine = new Line(0, i, 720, i);
+            HLine = new Line(0, i, 1500, i);
             HLine.setStroke(Color.LIGHTGRAY);
             wrapperPane.getChildren().addAll(VLine, HLine);
         }

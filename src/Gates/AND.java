@@ -9,8 +9,6 @@ import java.net.MalformedURLException;
  * Clase base para compuertas tipo AND.
  */
 public class AND extends Gate {
-    private boolean input1;
-    private boolean input2;
     private Gate prev2;
     protected Rectangle rectInput2;
 

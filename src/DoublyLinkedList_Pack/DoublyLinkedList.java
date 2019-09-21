@@ -4,10 +4,10 @@ import Logic.Gate;
 
 import java.net.MalformedURLException;
 
-public class DoublyLinkedList<T>{
+public class DoublyLinkedList{
     private int length;
-    private Gate first;
-    private Gate last;
+    protected Gate first;
+    protected Gate last;
 
     public DoublyLinkedList(){
         this.length = 0;
@@ -19,10 +19,27 @@ public class DoublyLinkedList<T>{
         return this.length;
     }
 
+    public boolean isEmpty(){
+        if (this.length == 0){
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
+
+    public void clearList(){
+        if (this.first == null){
+            return;
+        }
+        else{
+            this.first = null;
+        }
+    }
+
     public void getData(int index){
         if (index > this.length-1 || this.first == null || index < 0){
             System.out.println("Index out of range");
-            //return null;
         }
         else{
             int counter = 0;
@@ -35,7 +52,23 @@ public class DoublyLinkedList<T>{
         }
     }
 
-    public void setData(int index, String name){
+    public Gate getGate(int index){
+        if (index > this.length-1 || this.first == null || index < 0){
+            System.out.println("Index out of range");
+            return null;
+        }
+        else{
+            int counter = 0;
+            Gate current = this.first;
+            while(counter < index){
+                current = current.next;
+                counter ++;
+            }
+            return current;
+        }
+    }
+
+    public void setData(int index, String id){
         if (index > this.length-1 | this.first == null | index < 0){
             System.out.println("Index out of range");
         }
@@ -46,7 +79,7 @@ public class DoublyLinkedList<T>{
                 current = current.next;
                 counter ++;
             }
-            current.setName(name);
+            current.setMyID(id);
         }
     }
 
@@ -59,11 +92,11 @@ public class DoublyLinkedList<T>{
             Gate current = this.first;
             System.out.print("[");
             while (current.next != null) {
-                System.out.print(current.getName());
+                System.out.print(current.getPath());
                 System.out.print(", ");
                 current = current.next;
             }
-            System.out.print(current.getName());
+            System.out.print(current.getPath());
             System.out.println("]");
         }
     }
@@ -76,11 +109,11 @@ public class DoublyLinkedList<T>{
             Gate current = this.last;
             System.out.print("[");
             while(current.prev != null){
-                System.out.print(current.getName());
+                System.out.print(current.getMyID());
                 System.out.print(", ");
                 current = current.prev;
             }
-            System.out.print(current.getName());
+            System.out.print(current.getMyID());
             System.out.print("]");
         }
     }
@@ -90,7 +123,6 @@ public class DoublyLinkedList<T>{
         if (this.first == null){
             this.first = addedGate;
             this.last = this.first;
-            System.out.println("Done");
         }
         else {
             Gate newGate = addedGate;
@@ -100,7 +132,7 @@ public class DoublyLinkedList<T>{
         }
     }
 
-    public void addFirst(Gate addedGate) throws MalformedURLException {
+    public void addFirst(Gate addedGate) {
         this.length ++;
         if (this.first == null){
             this.first = addedGate;

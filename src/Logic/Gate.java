@@ -1,22 +1,18 @@
 package Logic;
 
-import javafx.geometry.Pos;
+import Interface.DrawLineFeature;
 import javafx.scene.Cursor;
-import javafx.scene.Group;
-import javafx.scene.canvas.Canvas;
-import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.Node;
+import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.ClipboardContent;
-import javafx.scene.input.Dragboard;
-import javafx.scene.input.TransferMode;
-import javafx.scene.layout.Background;
-import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
+import javafx.scene.shape.Line;
 import javafx.scene.shape.Rectangle;
+import javafx.scene.shape.Shape;
 
 import java.io.File;
 import java.net.MalformedURLException;
@@ -29,13 +25,36 @@ public abstract class Gate{
     protected Image image;
     protected ImageView imageView;
     protected static String path;
+
+    protected boolean input1;
+    protected boolean input2;
     protected boolean output;
+
+    protected String input1State = null;
+    protected String input2State = null;
+    protected String outputState = null;
+
     public Gate next;
     public Gate prev;
+
     public double posX;
     public double posY;
-    protected String name;
-    protected Rectangle rectInput1;
+
+    protected String myID = null;
+    protected String name = null;
+
+    protected Rectangle gateInterface;
+    protected Circle gateIn1;
+    protected Circle gateIn2;
+    protected Circle gateOut;
+
+    static int inNumber = 0;
+    static int outNumber = 0;
+
+    public Gate(){
+        this.next = null;
+        this.prev = null;
+    }
 
     /**
      * Método logic, contiene la lógica de cada compuerta.
@@ -51,8 +70,8 @@ public abstract class Gate{
      * @throws MalformedURLException
      */
     public Image loadGateImage() throws MalformedURLException {
-        File file1 = new File(path);
-        Image loadedImage = new Image(file1.toURI().toURL().toString());
+        file = new File(path);
+        Image loadedImage = new Image(file.toURI().toURL().toString());
         image = loadedImage;
         return loadedImage;
     }
@@ -71,47 +90,44 @@ public abstract class Gate{
         return imageV1;
     }
 
+    /**
+     * Método que crea todas las imágenes, figuras y labels de las compuertas.
+     * @param wrapperPane - Pane en el que se van a dibujar los diferentes componentes de las compuertas.
+     * @param posX - Posición en X en la que se van a ubicar los componentes.
+     * @param posY - Posición en Y en la que se van a ubicar los componentes.
+     */
+
     public void createGateInterface(Pane wrapperPane, double posX, double posY){
-        Rectangle gateInterface = new Rectangle( posX, posY, 80, 30);
+        gateInterface = new Rectangle( posX, posY, 80, 30);
         gateInterface.setFill(new ImagePattern(this.getImage()));
-        Circle gateIn1 = new Circle(posX + 5, posY + 9, 7);
+
+        Label in1L = new Label("i<" + inNumber + ">");
+        in1L.setLayoutX(posX);
+        in1L.setLayoutY(posY - 15);
+        inNumber ++;
+        gateIn1 = new Circle(posX + 5, posY + 9, 7);
         gateIn1.setFill(Color.TRANSPARENT);
         gateIn1.setCursor(Cursor.CROSSHAIR);
-        Circle gateIn2 = new Circle(posX + 5, posY + 22, 7);
+        gateIn1.setOnDragDetected(event -> DrawLineFeature.myLineDrawer(wrapperPane, gateIn1));
+
+        Label in2L = new Label("i<" + inNumber + ">");
+        in2L.setLayoutX(posX);
+        in2L.setLayoutY(posY + 28);
+        inNumber ++;
+        gateIn2 = new Circle(posX + 5, posY + 22, 7);
         gateIn2.setFill(Color.BLACK);
         gateIn2.setCursor(Cursor.CROSSHAIR);
-        Circle gateOut = new Circle(posX + 70, posY + 15 , 7);
+
+        Label outL = new Label("o<" + outNumber + ">");
+        outL.setLayoutX(posX + 85);
+        outL.setLayoutY(posY + 8);
+        this.myID = "Gate number" + outNumber;
+        outNumber ++;
+        gateOut = new Circle(posX + 70, posY + 15 , 7);
         gateOut.setFill(Color.BLACK);
         gateOut.setCursor(Cursor.CROSSHAIR);
-        wrapperPane.getChildren().addAll(gateInterface, gateIn1, gateIn2, gateOut);
-    }
 
-    public void canvasDragAndDrop(Pane wrapperPane) {
-        this.imageView.setOnDragDetected(event -> {
-            System.out.println(event.getSource());
-            Dragboard db = this.imageView.startDragAndDrop(TransferMode.ANY);
-            ClipboardContent content = new ClipboardContent();
-            content.putImage(this.getImage());
-            db.setContent(content);
-            event.consume();
-        });
-        wrapperPane.setOnDragOver(event -> {
-            if (event.getDragboard().hasImage()) {
-                event.acceptTransferModes(TransferMode.COPY_OR_MOVE);
-            }
-            event.consume();
-        });
-        wrapperPane.setOnDragDropped(event -> {
-            Dragboard db = event.getDragboard();
-            boolean success;
-            if (db.hasImage()) {
-                this.imageView.setTranslateX(event.getX());
-                this.imageView.setTranslateY(event.getY());
-                success = true;
-                event.setDropCompleted(success);
-                event.consume();
-            }
-        });
+        wrapperPane.getChildren().addAll(gateInterface, gateIn1, gateIn2, gateOut, in1L, in2L, outL);
     }
 
     public Image getImage() { return image; }
@@ -122,13 +138,45 @@ public abstract class Gate{
 
     public String getPath() { return path; }
 
-    public void setPath(String path) { this.path = path; }
-
-    public boolean isOutput() { return output; }
+    public boolean getOutput() { return output; }
 
     public void setOutput(boolean output) { this.output = output; }
 
-    public String getName() { return name; }
+    public boolean getInput1() { return input1; }
 
-    public void setName(String name) { this.name = name; }
+    public void setInput1(boolean input1) { this.input1 = input1; }
+
+    public boolean getInput2() { return input2; }
+
+    public void setInput2(boolean input2) { this.input2 = input2; }
+
+    public Gate getNext() { return next; }
+
+    public void setNext(Gate next) { this.next = next; }
+
+    public Gate getPrev() { return prev; }
+
+    public void setPrev(Gate prev) { this.prev = prev; }
+
+    public double getPosX() { return posX; }
+
+    public double getPosY() { return posY; }
+
+    public String getInput1State() { return input1State; }
+
+    public void setInput1State(String input1State) { this.input1State = input1State; }
+
+    public String getInput2State() { return input2State; }
+
+    public void setInput2State(String input2State) { this.input2State = input2State; }
+
+    public String getOutputState() { return outputState; }
+
+    public void setOutputState(String outputState) { this.outputState = outputState; }
+
+    public String getMyID() { return myID; }
+
+    public void setMyID(String myID) { this.myID = myID; }
+
+    public String getName() { return name; }
 }

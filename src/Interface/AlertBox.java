@@ -18,4 +18,17 @@ public class AlertBox {
         alert.setContentText(message);
         alert.showAndWait();
     }
+
+    /**
+     * Método que crea un AlerBox personalizado, ideal para mostrar resultados.
+     * @param title - Título de la ventana emergente.
+     * @param message - Mensaje que se incluirá en la ventana.
+     */
+    public static void displayResultAlertBox(String title, String message){
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle(title);
+        alert.setContentText(message);
+        alert.showAndWait();
+    }
+
 }

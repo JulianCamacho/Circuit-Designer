@@ -144,29 +144,20 @@ public class DragAndDropFeature {
             if (db.hasImage()) {
                 switch (gateType) {
                     case AND: {
-                        Gate newGate = null;
-                        Rectangle newRect = new Rectangle(event.getX() - 35, event.getY() - 15, 75, 30);
                         try {
-                            newGate = GateFactory.getGate(GateType.AND);
-                            newRect.setFill(new ImagePattern(newGate.getImage()));
-                            wrapperPane.getChildren().add(newRect);
-                            newGate.canvasDragAndDrop(wrapperPane);
-
+                            Gate newGate = GateFactory.getGate(GateType.AND);
+                            newGate.createGateInterface(wrapperPane, event.getX()-15, event.getY()-5);
+                            GUI.gateList.addLast(newGate);
                         } catch (MalformedURLException e) {
                             e.printStackTrace();
-                        } finally {
-                            System.out.println(1);
-                            //GUI.labelList.add(newLabel);
-                            System.out.println(2);
-                            GUI.gateList.add(newGate);
-                            System.out.println(3);
-                            System.out.println(GUI.gateList.size());
                         }
-                        break; }
+                        break;
+                        }
                     case NAND: {
                         try {
                             Gate newGate = GateFactory.getGate(GateType.NAND);
                             newGate.createGateInterface(wrapperPane, event.getX(), event.getY());
+                            GUI.gateList.addLast(newGate);
                         } catch (MalformedURLException e) {
                             e.printStackTrace();
                         }
@@ -176,6 +167,7 @@ public class DragAndDropFeature {
                         try {
                             Gate newGate = GateFactory.getGate(GateType.OR);
                             newGate.createGateInterface(wrapperPane, event.getX(), event.getY());
+                            GUI.gateList.addLast(newGate);
                         } catch (MalformedURLException e) {
                             e.printStackTrace();
                         }
@@ -185,6 +177,7 @@ public class DragAndDropFeature {
                         try {
                             Gate newGate = GateFactory.getGate(GateType.NOR);
                             newGate.createGateInterface(wrapperPane, event.getX(), event.getY());
+                            GUI.gateList.addLast(newGate);
                         } catch (MalformedURLException e) {
                             e.printStackTrace();
                         }
@@ -193,11 +186,8 @@ public class DragAndDropFeature {
                     case XOR: {
                         try {
                             Gate newGate = GateFactory.getGate(GateType.XOR);
-                            Label newLabel = new Label();
-                            newLabel.setLayoutX(event.getX() - 35);
-                            newLabel.setLayoutY(event.getY() - 15);
-                            wrapperPane.getChildren().add(newLabel);
-
+                            newGate.createGateInterface(wrapperPane, event.getX(), event.getY());
+                            GUI.gateList.addLast(newGate);
                         } catch (MalformedURLException e) {
                             e.printStackTrace();
                         }
@@ -206,11 +196,8 @@ public class DragAndDropFeature {
                     case XNOR: {
                         try {
                             Gate newGate = GateFactory.getGate(GateType.XNOR);
-                            Label newLabel = new Label();
-                            newLabel.setLayoutX(event.getX() - 35);
-                            newLabel.setLayoutY(event.getY() - 15);
-                            wrapperPane.getChildren().add(newLabel);
-
+                            newGate.createGateInterface(wrapperPane, event.getX(), event.getY());
+                            GUI.gateList.addLast(newGate);
                         } catch (MalformedURLException e) {
                             e.printStackTrace();
                         }
@@ -219,11 +206,26 @@ public class DragAndDropFeature {
                     case NOT: {
                         try {
                             Gate newGate = GateFactory.getGate(GateType.NOT);
-                            Label newLabel = new Label();
-                            newLabel.setLayoutX(event.getX() - 35);
-                            newLabel.setLayoutY(event.getY() - 15);
-                            wrapperPane.getChildren().add(newLabel);
-
+                            newGate.createGateInterface(wrapperPane, event.getX(), event.getY());
+                            GUI.gateList.addLast(newGate);
+                        } catch (MalformedURLException e) {
+                            e.printStackTrace();
+                        }
+                        break;
+                    }
+                    case TRUE: {
+                        try {
+                            Gate newGate = GateFactory.getGate(GateType.TRUE);
+                            newGate.createGateInterface(wrapperPane, event.getX(), event.getY());
+                        } catch (MalformedURLException e) {
+                            e.printStackTrace();
+                        }
+                        break;
+                    }
+                    case FALSE: {
+                        try {
+                            Gate newGate = GateFactory.getGate(GateType.FALSE);
+                            newGate.createGateInterface(wrapperPane, event.getX(), event.getY());
                         } catch (MalformedURLException e) {
                             e.printStackTrace();
                         }

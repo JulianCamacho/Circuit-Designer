@@ -1,37 +1,43 @@
 package Interface;
 
-import javafx.scene.Node;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Line;
-import javafx.scene.shape.Rectangle;
+import javafx.scene.shape.Shape;
 
 public class DrawLineFeature {
 
-    //private static int i = 0;
-    private static Node on;
-    private static Line currentLine;
+    protected static Object source;
+    protected static double posXi;
+    protected static double posYi;
+    protected static Object target;
+    protected static double posXf;
+    protected static double posYf;
 
-    public static void myLineDrawer(Rectangle rect, Pane wrapperPane) {
-        //for (int i = 0; i < wrapperPane.getChildren().size(); i++) {
-            rect.setOnMousePressed(e -> {
-                if (e.isSecondaryButtonDown()){
-                    System.out.println("lineando"+e.getSource());
-                    currentLine = new Line(e.getX(), e.getY(), e.getX(), e.getY());
-                    currentLine.setStroke(randomColor());
-                    wrapperPane.getChildren().add(currentLine);
-                }
-            });
-            wrapperPane.setOnMouseDragged(ev -> {
-                if(ev.isSecondaryButtonDown()){
-                    currentLine.setEndX(ev.getX());
-                    currentLine.setEndY(ev.getY());
-                    ev.consume();
-                }
-            });
-             //   }
-        }
-    //}
+    public static void myLineDrawer(Pane wrapperPane, Shape on) {
+        on.setOnMouseClicked(event -> {
+            System.out.println(event.getSource());
+            if (source == null){
+                source = event.getSource();
+                System.out.println(source);
+                posXi = event.getSceneX();
+                posYi = event.getSceneY();
+            }
+            else if (target == null){
+                target = event.getSource();
+                System.out.println(target);
+                posXf = event.getSceneX();
+                posYf = event.getSceneY();
+                Line newLine = new Line(posXi, posYi, posXf, posYf);
+                newLine.setStroke(randomColor());
+                wrapperPane.getChildren().add(newLine);
+            }
+            else{
+                source = null;
+                target = null;
+            }
+        });
+    }
 
     /**
      * Método randomColor: genera un color aleatorio a partir de valores rgb.
@@ -43,3 +49,4 @@ public class DrawLineFeature {
         return Color.rgb(r, g, b);
     }
 }
+
