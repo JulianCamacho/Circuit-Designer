@@ -2,7 +2,6 @@ package Logic;
 
 import Interface.DrawLineFeature;
 import javafx.scene.Cursor;
-import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -10,9 +9,7 @@ import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
-import javafx.scene.shape.Line;
 import javafx.scene.shape.Rectangle;
-import javafx.scene.shape.Shape;
 
 import java.io.File;
 import java.net.MalformedURLException;
@@ -26,19 +23,26 @@ public abstract class Gate{
     protected ImageView imageView;
     protected static String path;
 
-    protected boolean input1;
-    protected boolean input2;
-    protected boolean output;
+    public boolean input1;
+    public boolean input2;
+    public boolean output;
 
     protected String input1State = null;
     protected String input2State = null;
     protected String outputState = null;
 
+    protected boolean isIn1Connected;
+    protected boolean isIn2Connected;
+    protected boolean isOutConnected;
+
+    protected boolean isCalculated;
+
     public Gate next;
     public Gate prev;
 
-    public double posX;
-    public double posY;
+    public Gate realNext;
+    public Gate realPrev1;
+    public Gate realPrev2;
 
     protected String myID = null;
     protected String name = null;
@@ -48,8 +52,8 @@ public abstract class Gate{
     protected Circle gateIn2;
     protected Circle gateOut;
 
-    static int inNumber = 0;
-    static int outNumber = 0;
+    protected static int inNumber = 0;
+    protected static int outNumber = 0;
 
     public Gate(){
         this.next = null;
@@ -101,31 +105,36 @@ public abstract class Gate{
         gateInterface = new Rectangle( posX, posY, 80, 30);
         gateInterface.setFill(new ImagePattern(this.getImage()));
 
+        Label outL = new Label("o<" + outNumber + ">");
+        outL.setLayoutX(posX + 85);
+        outL.setLayoutY(posY + 8);
+        this.myID = this.name + ": Gate number " + outNumber;
+        outNumber ++;
+        gateOut = new Circle(posX + 70, posY + 15 , 7);
+        gateOut.setFill(Color.TRANSPARENT);
+        gateOut.setCursor(Cursor.CROSSHAIR);
+        gateOut.setOnMouseClicked(event -> DrawLineFeature.myLineDrawer(gateOut));
+        gateOut.setId(this.myID + ": output");
+
         Label in1L = new Label("i<" + inNumber + ">");
         in1L.setLayoutX(posX);
         in1L.setLayoutY(posY - 15);
         inNumber ++;
-        gateIn1 = new Circle(posX + 5, posY + 9, 7);
+        gateIn1 = new Circle(posX + 5, posY + 8, 7);
         gateIn1.setFill(Color.TRANSPARENT);
         gateIn1.setCursor(Cursor.CROSSHAIR);
-        gateIn1.setOnDragDetected(event -> DrawLineFeature.myLineDrawer(wrapperPane, gateIn1));
+        gateIn1.setOnMouseClicked(event -> DrawLineFeature.myLineDrawer(gateIn1));
+        gateIn1.setId(this.myID + ": input 1");
 
         Label in2L = new Label("i<" + inNumber + ">");
         in2L.setLayoutX(posX);
         in2L.setLayoutY(posY + 28);
         inNumber ++;
-        gateIn2 = new Circle(posX + 5, posY + 22, 7);
-        gateIn2.setFill(Color.BLACK);
+        gateIn2 = new Circle(posX + 5, posY + 23, 7);
+        gateIn2.setFill(Color.TRANSPARENT);
         gateIn2.setCursor(Cursor.CROSSHAIR);
-
-        Label outL = new Label("o<" + outNumber + ">");
-        outL.setLayoutX(posX + 85);
-        outL.setLayoutY(posY + 8);
-        this.myID = "Gate number" + outNumber;
-        outNumber ++;
-        gateOut = new Circle(posX + 70, posY + 15 , 7);
-        gateOut.setFill(Color.BLACK);
-        gateOut.setCursor(Cursor.CROSSHAIR);
+        gateIn2.setOnMouseClicked(event -> DrawLineFeature.myLineDrawer(gateIn2));
+        gateIn2.setId(this.myID + ": input 2");
 
         wrapperPane.getChildren().addAll(gateInterface, gateIn1, gateIn2, gateOut, in1L, in2L, outL);
     }
@@ -152,15 +161,7 @@ public abstract class Gate{
 
     public Gate getNext() { return next; }
 
-    public void setNext(Gate next) { this.next = next; }
-
     public Gate getPrev() { return prev; }
-
-    public void setPrev(Gate prev) { this.prev = prev; }
-
-    public double getPosX() { return posX; }
-
-    public double getPosY() { return posY; }
 
     public String getInput1State() { return input1State; }
 
@@ -179,4 +180,32 @@ public abstract class Gate{
     public void setMyID(String myID) { this.myID = myID; }
 
     public String getName() { return name; }
+
+    public boolean isIn1Connected() { return isIn1Connected; }
+
+    public void setIn1Connected(boolean in1Connected) { isIn1Connected = in1Connected; }
+
+    public boolean isIn2Connected() { return isIn2Connected; }
+
+    public void setIn2Connected(boolean in2Connected) { isIn2Connected = in2Connected; }
+
+    public boolean isOutConnected() { return isOutConnected; }
+
+    public void setOutConnected(boolean outConnected) { isOutConnected = outConnected; }
+
+    public boolean isCalculated() { return isCalculated; }
+
+    public void setCalculated(boolean calculated) { isCalculated = calculated; }
+
+    public Circle getGateIn1() { return gateIn1; }
+
+    public Circle getGateIn2() { return gateIn2; }
+
+    public Circle getGateOut() { return gateOut; }
+
+    public Rectangle getGateInterface() { return gateInterface; }
+
+    public static void setInNumber(int inNumber) { Gate.inNumber = inNumber; }
+
+    public static void setOutNumber(int outNumber) { Gate.outNumber = outNumber; }
 }

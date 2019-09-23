@@ -1,18 +1,19 @@
 package Interface;
 
 import DoublyLinkedList_Pack.DoublyLinkedList;
-import Gates.AND;
-import Gates.OR;
-import Logic.*;
+import Logic.CircuitSolver;
+import Logic.Gate;
+import Logic.TableWindow;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
-import javafx.scene.canvas.Canvas;
-import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
-import javafx.scene.layout.*;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
+
 import java.net.MalformedURLException;
 
 /**
@@ -23,6 +24,7 @@ public class GUI {
     protected static Pane wrapperPane;
     protected static Scene scene;
     public static DoublyLinkedList gateList;
+    public static DoublyLinkedList generalList = new DoublyLinkedList();
 
     /**
      * Método para crear la pantalla principal.
@@ -83,32 +85,42 @@ public class GUI {
 
         Button buttonRun = new Button("Run");
         buttonRun.setPrefSize(100, 20);
-        buttonRun.setOnMouseClicked(event -> gateList.printList());
+        buttonRun.setOnMouseClicked(event -> {
+            try {
+                CircuitSolver.evaluateFinalList(gateList);
+            } catch (MalformedURLException e) {
+                e.printStackTrace();
+            }
+        });
 
         Button buttonSave = new Button("Save");
         buttonSave.setPrefSize(100, 20);
-        buttonSave.setOnMouseClicked(event -> {
-            AlertBox.displayResultAlertBox("Demasiado flow", "Stop");
-        });
+        buttonSave.setOnMouseClicked(event -> gateList.printList());
+
 
         Button buttonClear = new Button("Clear");
         buttonClear.setPrefSize(100, 20);
         buttonClear.setOnMouseClicked(event -> {
             wrapperPane.getChildren().clear();
             gateList.clearList();
+            gateList.setLength(0);
+            generalList.clearList();
+            generalList.setLength(0);
+            Gate.setInNumber(0);
+            Gate.setOutNumber(0);
             CanvasGrid.drawGrid(wrapperPane);
         });
 
         Button buttonTable = new Button("Generate Truth Table");
         buttonTable.setPrefSize(100, 20);
-        buttonTable.setOnMouseClicked(event -> {
+        /*buttonTable.setOnMouseClicked(event -> {
             try {
                 TableWindow.createTableWindow();
             } catch (MalformedURLException e) {
                 e.printStackTrace();
-            }
+            }*/
+        buttonTable.setOnMouseClicked(event -> generalList.printList());
 
-        });
         hbox.getChildren().addAll(buttonRun, buttonSave, buttonClear, buttonTable);
         return hbox;
     }

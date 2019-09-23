@@ -19,8 +19,12 @@ public class DoublyLinkedList{
         return this.length;
     }
 
+    public void setLength(int newLength){
+        this.length = newLength;
+    }
+
     public boolean isEmpty(){
-        if (this.length == 0){
+        if (this.first == null){
             return true;
         }
         else{
@@ -29,12 +33,7 @@ public class DoublyLinkedList{
     }
 
     public void clearList(){
-        if (this.first == null){
-            return;
-        }
-        else{
-            this.first = null;
-        }
+        this.first = null;
     }
 
     public void getData(int index){
@@ -92,11 +91,11 @@ public class DoublyLinkedList{
             Gate current = this.first;
             System.out.print("[");
             while (current.next != null) {
-                System.out.print(current.getPath());
+                System.out.print(current.getName());
                 System.out.print(", ");
                 current = current.next;
             }
-            System.out.print(current.getPath());
+            System.out.print(current.getName());
             System.out.println("]");
         }
     }
