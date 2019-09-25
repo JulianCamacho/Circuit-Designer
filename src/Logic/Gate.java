@@ -69,6 +69,14 @@ public abstract class Gate{
     }
 
     /**
+     * Overload método logic, ayuda a el cálculo de la tabla de verdad.
+     * @return Valor de cada salida.
+     */
+    public boolean logic(boolean in1, boolean in2) {
+        return false;
+    }
+
+    /**
      * Método para cargar las imágenes: crea un archivo con la ruta de la imagen, a partir de este carga la imagen.
      * @return Image - Imagen cargada.
      * @throws MalformedURLException
@@ -109,32 +117,32 @@ public abstract class Gate{
         outL.setLayoutX(posX + 85);
         outL.setLayoutY(posY + 8);
         this.myID = this.name + ": Gate number " + outNumber;
-        outNumber ++;
         gateOut = new Circle(posX + 70, posY + 15 , 7);
         gateOut.setFill(Color.TRANSPARENT);
         gateOut.setCursor(Cursor.CROSSHAIR);
         gateOut.setOnMouseClicked(event -> DrawLineFeature.myLineDrawer(gateOut));
-        gateOut.setId(this.myID + ": output");
+        gateOut.setId("o<" + outNumber + ">");
+        outNumber ++;
 
         Label in1L = new Label("i<" + inNumber + ">");
         in1L.setLayoutX(posX);
         in1L.setLayoutY(posY - 15);
-        inNumber ++;
         gateIn1 = new Circle(posX + 5, posY + 8, 7);
         gateIn1.setFill(Color.TRANSPARENT);
         gateIn1.setCursor(Cursor.CROSSHAIR);
         gateIn1.setOnMouseClicked(event -> DrawLineFeature.myLineDrawer(gateIn1));
-        gateIn1.setId(this.myID + ": input 1");
+        gateIn1.setId("i<" + inNumber + ">");
+        inNumber ++;
 
         Label in2L = new Label("i<" + inNumber + ">");
         in2L.setLayoutX(posX);
         in2L.setLayoutY(posY + 28);
-        inNumber ++;
         gateIn2 = new Circle(posX + 5, posY + 23, 7);
         gateIn2.setFill(Color.TRANSPARENT);
         gateIn2.setCursor(Cursor.CROSSHAIR);
         gateIn2.setOnMouseClicked(event -> DrawLineFeature.myLineDrawer(gateIn2));
-        gateIn2.setId(this.myID + ": input 2");
+        gateIn2.setId("i<" + inNumber + ">");
+        inNumber ++;
 
         wrapperPane.getChildren().addAll(gateInterface, gateIn1, gateIn2, gateOut, in1L, in2L, outL);
     }
@@ -145,23 +153,9 @@ public abstract class Gate{
 
     public ImageView getImageView() { return imageView; }
 
-    public String getPath() { return path; }
-
     public boolean getOutput() { return output; }
 
     public void setOutput(boolean output) { this.output = output; }
-
-    public boolean getInput1() { return input1; }
-
-    public void setInput1(boolean input1) { this.input1 = input1; }
-
-    public boolean getInput2() { return input2; }
-
-    public void setInput2(boolean input2) { this.input2 = input2; }
-
-    public Gate getNext() { return next; }
-
-    public Gate getPrev() { return prev; }
 
     public String getInput1State() { return input1State; }
 
@@ -194,8 +188,6 @@ public abstract class Gate{
     public void setOutConnected(boolean outConnected) { isOutConnected = outConnected; }
 
     public boolean isCalculated() { return isCalculated; }
-
-    public void setCalculated(boolean calculated) { isCalculated = calculated; }
 
     public Circle getGateIn1() { return gateIn1; }
 

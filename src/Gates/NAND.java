@@ -24,4 +24,8 @@ public class NAND extends Gate {
         return NANDresult;
     }
 
+    @Override
+    public boolean logic(boolean in1, boolean in2) {
+        return !(in1 & in2);
+    }
 }

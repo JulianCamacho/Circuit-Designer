@@ -1,6 +1,8 @@
 package Gates;
 
 import Logic.Gate;
+
+import javax.jws.Oneway;
 import java.net.MalformedURLException;
 
 /**
@@ -23,5 +25,9 @@ public class AND extends Gate {
         return ANDresult;
     }
 
+    @Override
+    public boolean logic(boolean in1, boolean in2) {
+         return in1 & in2;
+    }
 
 }

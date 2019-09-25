@@ -31,7 +31,6 @@ public class CircuitSolver {
                             } else if (currentGate.getInput1State() != null && currentGate.isCalculated() == false) {
                                 boolean calculatedOutput = currentGate.logic();
                                 currentGate.setOutput(calculatedOutput);
-                                currentGate.setCalculated(true);
                                 i++;
                                 contOuts++;
                             }
@@ -42,7 +41,6 @@ public class CircuitSolver {
                             }
                             else if ((currentGate.getInput1State() != null || currentGate.getInput2State() != null) && currentGate.isCalculated() == false) {
                                 currentGate.logic();
-                                System.out.println(currentGate + currentGate.getOutputState());
                                 if (currentGate.getOutputState() == "input1") {
                                     joinSource_Input1(currentGate, currentGate.realNext);
                                     currentGate.realNext.setInput1State("true");
@@ -100,7 +98,7 @@ public class CircuitSolver {
         int h = 0;
         String finalMessage = "The results are: " + "\n";
         while(h < resultList.getLength()){
-            finalMessage += ("For: " + resultList.getGate(h).getMyID() + ": " + resultList.getGate(h).getOutput() + "\n");
+            finalMessage += ("For: " + resultList.getGate(h).getMyID() + ": " + resultList.getGate(h).getGateOut().getId() + ": " + resultList.getGate(h).getOutput() + "\n");
             h++;
         }
         AlertBox.displayResultAlertBox("Circuit results", finalMessage);

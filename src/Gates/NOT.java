@@ -33,6 +33,11 @@ public class NOT extends Gate {
     }
 
     @Override
+    public boolean logic(boolean in1, boolean in2) {
+        return !(in1);
+    }
+
+    @Override
     public void createGateInterface(Pane wrapperPane, double posX, double posY) {
         gateInterface = new Rectangle( posX, posY, 80, 30);
         gateInterface.setFill(new ImagePattern(this.getImage()));
@@ -41,13 +46,12 @@ public class NOT extends Gate {
         outL.setLayoutX(posX + 85);
         outL.setLayoutY(posY + 8);
         this.myID = this.name + ": Gate number " + outNumber;
-        outNumber ++;
         gateOut = new Circle(posX + 70, posY + 15 , 7);
         gateOut.setFill(Color.TRANSPARENT);
         gateOut.setCursor(Cursor.CROSSHAIR);
         gateOut.setOnMouseClicked(event -> DrawLineFeature.myLineDrawer(gateOut));
-        gateOut.setId(this.myID + " output");
-        //gateOut.setOnMouseEntered(event -> System.out.println("En output... de" + this.myID));
+        gateOut.setId("o<" + outNumber + ">");
+        outNumber ++;
 
         Label in1L = new Label("i<" + inNumber + ">");
         in1L.setLayoutX(posX);
@@ -57,8 +61,7 @@ public class NOT extends Gate {
         gateIn1.setFill(Color.RED);
         gateIn1.setCursor(Cursor.CROSSHAIR);
         gateIn1.setOnMouseClicked(event -> DrawLineFeature.myLineDrawer(gateIn1));
-        gateIn1.setId(this.myID + " input 1");
-        //gateIn1.setOnMouseEntered(event -> System.out.println("En input 1... de" + this.myID));
+        gateIn1.setId("i<" + inNumber + ">");
 
         wrapperPane.getChildren().addAll(gateInterface, gateIn1, gateOut, in1L, outL);
     }

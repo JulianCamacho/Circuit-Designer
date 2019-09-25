@@ -5,6 +5,7 @@ import Logic.CircuitSolver;
 import Logic.Gate;
 import Logic.TableWindow;
 import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
@@ -112,16 +113,16 @@ public class GUI {
         });
 
         Button buttonTable = new Button("Generate Truth Table");
-        buttonTable.setPrefSize(100, 20);
-        /*buttonTable.setOnMouseClicked(event -> {
+        buttonTable.setPrefSize(150, 20);
+        buttonTable.setOnMouseClicked(event -> {
             try {
                 TableWindow.createTableWindow();
             } catch (MalformedURLException e) {
                 e.printStackTrace();
-            }*/
-        buttonTable.setOnMouseClicked(event -> generalList.printList());
+            }
+        });
 
-        hbox.getChildren().addAll(buttonRun, buttonSave, buttonClear, buttonTable);
+        hbox.getChildren().addAll(buttonRun, buttonClear, buttonTable, buttonSave);
         return hbox;
     }
 }
