@@ -58,7 +58,7 @@ public class NOT extends Gate {
         in1L.setLayoutY(posY - 15);
         inNumber ++;
         gateIn1 = new Circle(posX + 5, posY + 15, 7);
-        gateIn1.setFill(Color.RED);
+        gateIn1.setFill(Color.TRANSPARENT);
         gateIn1.setCursor(Cursor.CROSSHAIR);
         gateIn1.setOnMouseClicked(event -> DrawLineFeature.myLineDrawer(gateIn1));
         gateIn1.setId("i<" + inNumber + ">");

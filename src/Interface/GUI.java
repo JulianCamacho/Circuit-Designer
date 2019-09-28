@@ -27,19 +27,10 @@ public class GUI {
     public static DoublyLinkedList gateList;
     public static DoublyLinkedList generalList = new DoublyLinkedList();
 
-    /**
-     * Método para crear la pantalla principal.
-     * @return Stage - retorna el Stage principal modificado de la aplicación.
-     * @throws MalformedURLException
-     */
-
     public static void createInterface() throws MalformedURLException {
         Stage secondaryStage = new Stage();
         secondaryStage.setTitle("Circuit Designer");
 
-        /**
-         * Creación de stages, scenes, canvas, graphicsContext, bases de la aplicación
-         **/
         BorderPane root = new BorderPane();
         scene = new Scene(root,900, 600, Color.LIGHTGRAY );
         wrapperPane = new Pane();
@@ -69,8 +60,6 @@ public class GUI {
         gateList = new DoublyLinkedList();
 
         CanvasGrid.drawGrid(wrapperPane);
-
-        //return primaryStage;
     }
 
     /**

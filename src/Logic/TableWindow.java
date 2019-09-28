@@ -45,18 +45,29 @@ public class TableWindow {
         return tableStage;
     }
 
+    /**
+     * Método que crea las columnas de la tabla de verdad
+     * @param finalList
+     */
+
     public static void generateTruth(DoublyLinkedList finalList) {
         if (finalList.isEmpty()){
             AlertBox.displayAlertBox("Empty Circuit", "Your circuit is empty");
         }
         else {
+
+            //Ciclo que revisa la lista
             for (int i = 0; i < finalList.getLength(); i++) {
                 Gate currentGate = finalList.getGate(i);
-                System.out.println(currentGate);
+
+                //Identifica si se trata de un NOT o no
                 if (currentGate.getName() != "NOT") {
+
+                    //Se crea el título con el nombre de la compuerta
                     Label l1 = new Label(currentGate.getName());
                     l1.setTextFill(Color.WHITE);
 
+                    //Crea ListViews con las columnas de la tabla de verdad con los posibles valores que puede tener cada compuerta
                     ListView<String> newColumn1 = new ListView<>();
                     newColumn1.getItems().addAll(currentGate.getGateIn1().getId(), "true", "true", "false", "false");
 

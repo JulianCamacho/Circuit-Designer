@@ -1,6 +1,4 @@
 package Logic;
-
-import Interface.GUI;
 import Interface.MenuWindow;
 import javafx.application.Application;
 import javafx.stage.Stage;

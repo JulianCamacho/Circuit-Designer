@@ -13,6 +13,12 @@ import java.net.MalformedURLException;
 
 public class MenuWindow {
 
+    /**
+     * Método que crea la ventana principal, con una imagen de fondo y un botón para ir a la ventana del modelador de circuitos
+     * @param primaryStage
+     * @return El Stage principal
+     * @throws MalformedURLException
+     */
     public static Stage createMenu(Stage primaryStage) throws MalformedURLException {
         primaryStage.setTitle("Menu");
         StackPane bp = new StackPane();
