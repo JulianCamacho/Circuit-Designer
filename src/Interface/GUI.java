@@ -29,13 +29,13 @@ public class GUI {
 
     /**
      * Método para crear la pantalla principal.
-     * @param primaryStage
      * @return Stage - retorna el Stage principal modificado de la aplicación.
      * @throws MalformedURLException
      */
 
-    public static Stage createInterface(Stage primaryStage) throws MalformedURLException {
-        primaryStage.setTitle("Circuit Designer");
+    public static void createInterface() throws MalformedURLException {
+        Stage secondaryStage = new Stage();
+        secondaryStage.setTitle("Circuit Designer");
 
         /**
          * Creación de stages, scenes, canvas, graphicsContext, bases de la aplicación
@@ -60,8 +60,8 @@ public class GUI {
         HBox myHBox = addHBox();
         root.setTop(myHBox);
 
-        primaryStage.setScene(scene);
-        primaryStage.show();
+        secondaryStage.setScene(scene);
+        secondaryStage.show();
 
         DragAndDropFeature dragdrop = new DragAndDropFeature();
         dragdrop.myDragAndDrop(wrapperPane, myFlowPane);
@@ -70,7 +70,7 @@ public class GUI {
 
         CanvasGrid.drawGrid(wrapperPane);
 
-        return primaryStage;
+        //return primaryStage;
     }
 
     /**

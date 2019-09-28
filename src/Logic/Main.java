@@ -1,6 +1,7 @@
 package Logic;
 
 import Interface.GUI;
+import Interface.MenuWindow;
 import javafx.application.Application;
 import javafx.stage.Stage;
 
@@ -21,6 +22,6 @@ public class Main extends Application {
      */
     @Override
     public void start(Stage primaryStage) throws Exception {
-        GUI.createInterface(primaryStage);
+        MenuWindow.createMenu(primaryStage);
     }
 }

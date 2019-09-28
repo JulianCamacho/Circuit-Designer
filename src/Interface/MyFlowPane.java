@@ -14,7 +14,7 @@ import java.net.MalformedURLException;
 public class MyFlowPane {
 
     private ImageView iV1, iV2, iV3, iV4, iV5, iV6, iV7, iV8, iV9;
-    private FlowPane flow = new FlowPane();
+    public static FlowPane flow = new FlowPane();
 
     /**
      * Método para cargar las imágenes y generar ImageViews desde donde de hace el Drag & Drop, en el FLowPane.
