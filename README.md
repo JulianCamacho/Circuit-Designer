@@ -1,7 +1,15 @@
-# Proyecto-1---Circuit-Designer
+# Circuit Designer
 
-URL JavaDoc: 
-file:///C:/Users/toshiba/Documents/!A%20--%20TEC%20--%20II%20Semestre%20--%202019/Proyecto%20%231%20-%20Circuit%20Designer/JavaDoc/index.html
+![LogoTEC2](https://user-images.githubusercontent.com/48873181/65214107-f21c3e00-da65-11e9-836d-633f34a777c4.png)
 
-URL GitHub: 
-https://github.com/JulianCamacho/Proyecto-1---Circuit-Designer
+### Área de Ingeniería en Computadores  
+### Algoritmos y Estructuras de Datos II  
+#### Primer Semestre 2020  
+
+
+## Proyecto I - Circuit Designer
+
+##### Profesor: 
+Isaac Ramírez Herrera    
+##### Estudiante:  
+José Julián Camacho Hernández     
